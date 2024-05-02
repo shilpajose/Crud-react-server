@@ -1,0 +1,90 @@
+database-mongodb
+
+- Databases are used to store and manipulate data permanently
+- ex: sql , data store as table, column row, = structured query language.
+- NoSql Database: structureless Database
+- Data stored as document = document oriented DB
+       - documentis similar as JSON = key value pair and they will be in string format
+- Collection: collection of documents 
+- can hold multiple collection in single db.
+- our project:user , project, review
+- multiple collections can hold
+
+-mongodb commands
+   - show database: display all database
+   - show db-name:shift control to specify db
+   - show collections - display all collections in db
+   - db.colletionname.find() = display all collections in a db
+   - db.colletionname.findOne() = display single document from collections in a db
+   - null = no data 
+   - to insert single data = db.users.insertOne({username:"shil",email:"s@gmail.com",password:"abc123"})
+     - db.users.insertOne({key:value})
+   - db.users.insertOne({uname:"steve",age:5,hobbies:["Drawing","playing"]})
+   - bison = binory json mongodb il data store aavunnath...
+   -db.users.insertMany([{uname:"shila",age:33},{uname:"midhu",age:34}])
+  - db.users.insertMany([{key:value},{key:value}])
+  - count(): display total count of items 
+    - db.users.find().count()  
+- db.users.find({uname:{$exists:true}})
+- db.users.find({uname:{$exists:false}})
+- db.users.find({age:{$gt:25}})  = $gt = greater than
+- db.users.find(age:{$gt:23,$lt:25})  $lt less than 
+- db.users.find({$expr:{$gt:["$debt","$balance"]}})  debt > balance
+- db.users.find({age:27})
+- db.users.updateMany({age:27},{$set:{age:28}})
+-db.users.updateOne({uname:"steve"},{$push:{hobbies:"dancing"}})  //additional hobby added
+-db.users.updateOne({uname:"steve"},{$pull:{hobbies:"dancing"}})  // hobby removed
+---------------------------------------------------------------------------------------------------------
+COMBINING two collections
+
+-db.projects.insertMany([{title:"Media Player",userId:ObjectId('660260c47b8a7a921fe73cda')},{title:"ECart",userId:ObjectId('660260c47b8a7a921fe73cdb')}])
+-db.projects.insertOne({title:"Calculator",userId:ObjectId('660260b07b8a7a921fe73cd9')})
+-db.projects.insertOne([{title:"App",userId:ObjectId('660260b07b8a7a921fe73cd9')},{title:"Redux-ecart",userId:ObjectId('6602676c7b8a7a921fe73cdf')}])
+
+Same user userId
+db.projects.insertOne([{title:"App",userId:ObjectId('660260b07b8a7a921fe73cd9')},{title:"Redux-ecart",userId:ObjectId('6602676c7b8a7a921fe73cdf')}])
+
+Combining two collections
+------------------------
+db.users.aggregate([{$lookup:{from:"projects",localField:"_id",foreignField:"userId",as:"allProjects"}}])
+
+Quering statements
+ -$exists
+ -$nin
+ -$gt/$lt/$gte/$lte
+ -$eq
+ -$and
+ -$or
+ -$expr
+
+ - db.users.updateOne({uname:"tony"},{$inc:{age:3}})
+   -findOne({uname:"tony"})
+
+   -deleteOne - single docs
+   -deleteMany - multiple docs
+
+
+   ----------------------------------------------
+   MONGOOSE - ODM - (object data model for mongodb to nodejs)
+
+   1. mongoosejs.com
+   installmongoose : npm i mongoose --save
+   2. connect db with nodejs
+      - create folder for defining db connections = DB
+      -inside that folder js files for coonections.
+      - import mongoose 
+      - connect db via mongoose
+      -schema- structure of data / document to be stored in db
+        -create object for mongoosa.schema class
+        - schema types
+      - model :collection of documents
+      - node communicate with model ,mongoose providing model, 
+        mongoose communicate with mongodb.
+          model create
+            - mongoose.model(model-name.schema)
+            - node app will communicate with model instead of mongodb directly.
+
+   
+
+
+
