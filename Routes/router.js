@@ -49,7 +49,6 @@ router.delete('/admin/delete-user/:_id',userController.deleteUser)
 // delete placements
 router.delete('/admin/delete-placement/:_id',placementController.deletePlacement)
 
-
 // edit placement 
 router.put('/admin/edit-placement/:pid',placementController.editPlacements)
 
